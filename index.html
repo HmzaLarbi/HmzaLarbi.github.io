@@ -3,6 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet"
+        />
         <title>Portfolio</title>
         <style>
             :root {
@@ -21,33 +27,50 @@
                 margin: 0;
                 height: 100vh;
                 background-color: var(--bg-dark);
-                background-image: radial-gradient(
-                        700px 700px at 30% 20%,
-                        rgba(0, 255, 153, 0.09),
-                        transparent 20%
-                    ),
-                    radial-gradient(
-                        500px 500px at 80% 80%,
-                        rgba(0, 200, 120, 0.04),
-                        transparent 18%
-                    );
                 color: var(--text-light);
-                font-family: "Segoe UI", sans-serif;
+                font-family: "ubuntu", sans-serif;
                 overflow-x: hidden;
-                position: relative;
+                width: 100vw;
             }
 
+            #background {
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                overflow: hidden;
+                animation: wave 20s ease-in-out infinite;
+                transform-origin: center;
+            }
+
+            /* Circles */
             .circle {
                 position: absolute;
                 border-radius: 50%;
-                background: radial-gradient(
-                    circle at top left,
-                    rgba(0, 255, 153, 0.15),
-                    transparent 70%
-                );
-                backdrop-filter: blur(12px);
+                mix-blend-mode: overlay;
+                filter: blur(10px);
                 opacity: 0.4;
-                z-index: 0;
+                animation: float 12s ease-in-out infinite alternate;
+            }
+
+            @keyframes float {
+                0% {
+                    transform: translateY(0px) translateX(0px);
+                }
+                100% {
+                    transform: translateY(-40px) translateX(20px);
+                }
+            }
+
+            @keyframes wave {
+                0% {
+                    transform: rotate(0deg) scale(1);
+                }
+                50% {
+                    transform: rotate(1deg) scale(1.2);
+                }
+                100% {
+                    transform: rotate(0deg) scale(1);
+                }
             }
 
             nav {
@@ -131,27 +154,21 @@
                 text-align: center;
             }
 
-            section p {
-                line-height: 1.6;
-                font-size: 1rem;
-                color: var(--text-light);
+            .skills-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 20px;
             }
 
-            ul {
-                margin-top: 10px;
-                padding-left: 20px;
-            }
-
-            li {
-                margin-bottom: 6px;
-            }
-
-            /* === PROJECTS SECTION === */
             .projects-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 30px;
+                grid-template-columns: repeat(2,1fr);
+                gap: 24px;
             }
+            
+            .projects-grid > :first-child {
+    grid-column: span 2; /* Make the first item span across both columns */
+}
 
             .project-card {
                 position: relative;
@@ -159,6 +176,9 @@
                 overflow: hidden;
                 cursor: pointer;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
+                min-height: 100px;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+                border: 1px solid rgba(255, 255, 255, 0.02);
             }
 
             .project-card:hover {
@@ -174,7 +194,7 @@
                 display: block;
             }
 
-            .project-info {
+            .tech-info {
                 position: absolute;
                 bottom: 0;
                 left: 0;
@@ -190,19 +210,88 @@
                 border-radius: 0 0 16px 16px;
             }
 
+            .tech-card .tech-info {
+                position: static;
+                width: auto;
+                padding: 20px;
+                border-radius: 12px;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
+                text-align: center;
+                margin: 10px;
+            }
+
+            .tech-card .tech-info h4 {
+                color: var(--accent-green);
+                font-size: 1rem;
+            }
+
+            .tech-card .tech-info p {
+                color: var(--text-light);
+                opacity: 0.9;
+                margin-top: 8px;
+                font-size: 0.95rem;
+            }
+
+            /* PROJECT SECTION */
+            .project-info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, 0.8) 0%,
+                    rgba(0, 0, 0, 0.4) 60%,
+                    transparent 100%
+                );
+                color: var(--text-light);
+                border-radius: 0 0 16px 16px;
+                display: flex; /* align h4 and p in one row */
+                align-items: center; /* vertically center */
+                gap: 10px; /* small space between h4 and p */
+            }
+
             .project-info h4 {
+                font-size: 1.3rem;
+                font-weight: bold;
+                color: var(--accent-green);
                 margin: 0;
-                font-size: 1.1rem;
-                font-weight: 600;
             }
 
             .project-info p {
-                margin: 3px 0 0 0;
-                font-size: 0.9rem;
-                opacity: 0.9;
+                font-size: 1rem;
+                font-weight: normal;
+                color: rgba(255, 255, 255, 0.6);
+                margin: 0;
             }
 
-            /* === MODAL === */
+            /* CONTACT SECTION */
+            .contact-icons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+
+            .contact-icons a {
+                display: inline-block;
+                transition: transform 0.3s ease, filter 0.3s ease;
+            }
+
+            .contact-icons img {
+                width: 60px;
+                height: 60px;
+                filter: drop-shadow(0 0 4px rgba(0, 255, 153, 0.4));
+            }
+
+            .contact-icons a:hover {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 10px var(--accent-green));
+            }
+
             .modal {
                 position: fixed;
                 top: 0;
@@ -297,27 +386,51 @@
                     opacity: 0;
                 }
             }
+
+            /* Responsive tweaks */
+            @media (max-width: 600px) {
+                .hero h1 {
+                    font-size: 2.5rem;
+                }
+
+                .projects-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
         </style>
     </head>
     <body>
         <nav id="navbar">
             <a href="#about">About Me</a>
+            <a href="#techstack">Tech Stack</a>
             <a href="#projects">My Projects</a>
             <a href="#contact">Contact Me</a>
-            <a href="#cv">Curriculum Vitae</a>
+            <a href="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/cv.pdf">Curriculum Vitae</a>
         </nav>
-
+        <div id="background"></div>
         <script>
-            for (let i = 0; i < 6; i++) {
+            const background = document.getElementById("background");
+
+            // Number of circles
+            const circleCount = 12;
+
+            for (let i = 0; i < circleCount; i++) {
                 const circle = document.createElement("div");
                 circle.classList.add("circle");
-                const size = Math.random() * 200 + 150;
+
+                const size = 150 + Math.random() * 400;
                 circle.style.width = `${size}px`;
                 circle.style.height = `${size}px`;
                 circle.style.top = `${Math.random() * 100}%`;
                 circle.style.left = `${Math.random() * 100}%`;
-                circle.style.filter = `blur(${Math.random() * 10 + 8}px)`;
-                document.body.appendChild(circle);
+
+                const hue = Math.random() * 360;
+                circle.style.background = `radial-gradient(circle, hsl(${hue}, 70%, 60%), transparent 70%)`;
+
+                circle.style.animationDuration = `${10 + Math.random() * 10}s`;
+                circle.style.animationDelay = `${Math.random() * 5}s`;
+
+                background.appendChild(circle);
             }
         </script>
 
@@ -349,8 +462,8 @@
                     alongside functional code.
                 </li>
                 <li>
-                    Currently freelancing with BYB Tech, contributing to cross-platform tools and
-                    real-time systems.
+                    Currently freelancing with BYB Tech Srl, contributing to cross-platform tools
+                    and real-time systems.
                 </li>
             </ul>
 
@@ -369,34 +482,141 @@
             </p>
         </section>
 
+        <h2 id="techstack" class="section-title">Tech Stack</h2>
+        <section>
+            <div class="skills-grid">
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Programming Languages</h4>
+                        <p>C, C++, Arduino</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Frameworks & Libraries</h4>
+                        <p>Qt</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Databases</h4>
+                        <p>MySQL, SQLite</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>DevOps / CI-CD</h4>
+                        <p>Docker, GitHub Actions</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Version Control</h4>
+                        <p>Git, GitHub, Bitbucket</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Project Management</h4>
+                        <p>Jira, Trello</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Design Tools</h4>
+                        <p>Figma, Canva</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>API Testing Tools</h4>
+                        <p>Postman</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Operating Systems</h4>
+                        <p>macOS, Windows, Linux</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <h2 id="projects" class="section-title">My Projects</h2>
         <section>
             <div class="projects-grid">
                 <div
                     class="project-card"
-                    data-company="BYB Tech"
-                    data-role="Qt Developer"
-                    data-dates="01/2023 - Present"
+                    data-company="BYB Tech Srl"
+                    data-role="Qt/C++ Software Engineer"
+                    data-company-description="BYB Tech Srl is a leading provider of advanced telemetry and data acquisition solutions for the cycling industry."
+                    data-dates="05/2022 - Present"
+                    data-role-location="Italy - Brescia (Remote)"
                     data-description="Developed cross-platform Qt applications, refactored legacy codebases, and implemented real-time data visualization dashboards."
                 >
-                    <img src="1.png" alt="BYB Tech" />
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/bybtech.png" alt="BYB Tech Srl" />
                     <div class="project-info">
-                        <h4>BYB Tech</h4>
-                        <p>Qt Developer</p>
+                        <h4>BYB Tech Srl</h4> 
                     </div>
                 </div>
 
                 <div
                     class="project-card"
-                    data-company="InnovSoft"
-                    data-role="Embedded Software Engineer"
-                    data-dates="05/2021 - 12/2022"
-                    data-description="Worked on embedded Linux systems integrating CAN bus communication and real-time telemetry visualization."
+                    data-company="Power Gauge Pro"
+                    data-role="Qt/C++ Software Developer for embedded systems"
+                    data-company-description="Power Gauge Pro is a cutting-edge developer of customizable digital dashboards and instrument clusters for real-time vehicle data and diagnostics."
+                    data-dates="09/2024 - 04/2025"
+                    data-role-location="United States - Michigan (Remote)"
+                    data-description="Built and tested a user interface for an embedded device with a focus on smooth visuals and real-time updates. Integrated system features such as Wi-Fi, sensors, and communication ports to enable data collection and control. Completely redesigned the interface from scratch based on a custom Figma design, enhancing both usability and visual appeal."
                 >
-                    <img src="2.png" alt="InnovSoft" />
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/powergaugepro.png" alt="Power Gauge Pro" />
                     <div class="project-info">
-                        <h4>InnovSoft</h4>
-                        <p>Embedded Software Engineer</p>
+                        <h4>Power Gauge Pro</h4> 
+                    </div>
+                </div>
+
+                <div
+                    class="project-card"
+                    data-company="VersaWare"
+                    data-role="Qt/C++ Software Developer"
+                    data-company-description="VersaWare is a software solutions company specializing in embedded systems and IoT applications."
+                    data-dates="01/2023 - 03/2023"
+                    data-role-location="United States - Michigan (Remote)"
+                    data-description="Implemented new components for the front-end user interface (UI), incorporating fully customized components and animations to enhance user experience."
+                >
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/versaware.png" alt="VersaWare" />
+                    <div class="project-info">
+                        <h4>VersaWare</h4> 
+                    </div>
+                </div>
+
+                 <div
+                    class="project-card"
+                    data-company="Amnezia"
+                    data-role="Qt/C++ Software Developer"
+                    data-company-description="Amnezia VPN is a leading provider of secure and private internet access solutions."
+                    data-dates="09/2023 - 01/2024"
+                    data-role-location="Open-source (Remote)"
+                    data-description="I had the opportunity to work on this project for several months, contributing to the modernization of the user interface and initiating the upgrade from Qt 5.6 to Qt 6.3."
+                >
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/amneziavpn.png" alt="Amnezia" />
+                    <div class="project-info">
+                        <h4>Amnezia</h4> 
+                    </div>
+                </div>
+
+                <div
+                    class="project-card"
+                    data-company="Flybotix"
+                    data-role="Qt/C++ Software Developer"
+                    data-company-description="Flybotix is a company specializing in drone technology and software solutions."
+                    data-dates="01/2021 - 01/2022"
+                    data-role-location="Switzerland - Renens (Remote)"
+                    data-description="Redesigned the user interface from a light theme to a modern dark theme using updated components. Added support for IR images and an interactive 3D view. Implemented advanced POI management from the main view, allowing users to view and edit detailed information on the right panel, which can be exported in reports. Additionally, integrated search, filter, delete, and hide functionalities for improved usability and data handling."
+                >
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/flybotix.png" alt="Flybotix" />
+                    <div class="project-info">
+                        <h4>Flybotix</h4> 
                     </div>
                 </div>
             </div>
@@ -406,12 +626,45 @@
             <div class="modal-content">
                 <span class="close-btn" id="close-modal">&times;</span>
                 <img id="modal-image" src="" alt="Project Image" />
-                <h3 id="modal-company"></h3>
-                <p id="modal-role"></p>
-                <p id="modal-dates" style="color: #aaa; font-size: 0.9rem"></p>
+                <h3 id="modal-company"
+                style="display: inline-block"></p>
+                ></h3>
+                <p
+                    id="modal-role-location"
+                    style="color: #aaa; font-size: 0.9rem; display: inline-block; margin-left: 15px"
+                ></p>
+                <br />
+                <p id="modal-role" >  </p>
+                <p id="modal-dates" style="color: #aaa; font-size: 0.9rem; font-style: italic"></p>
                 <p id="modal-description"></p>
+                <hr style="opacity: 0.4;">
+                <p id="modal-company-description" style="color: #aaa; font-size: 0.9rem; font-style: italic"></p>
             </div>
         </div>
+
+        <h2 id="contact" class="section-title">Contact Me</h2>
+        <section>
+            <div class="contact-icons">
+                <a href="https://github.com/HmzaLarbi" target="_blank" title="GitHub">
+                    <img
+                        src="https://img.icons8.com/?size=100&id=LoL4bFzqmAa0&format=png&color=000000"
+                        alt="GitHub"
+                    />
+                </a>
+                <a href="https://linkedin.com/in/larbihamza" target="_blank" title="LinkedIn">
+                    <img
+                        src="https://img.icons8.com/?size=100&id=kBCrQMzpQDLQ&format=png&color=000000"
+                        alt="LinkedIn"
+                    />
+                </a>
+                <a href="mailto:larbi0hamza@gmail.com" title="Email">
+                    <img src="https://img.icons8.com/?size=100&id=Iq5AZypojpBD&format=png&color=000000" alt="Email" />
+                </a>
+                <a href="https://wa.me/213699543035?text=Hello%20Hamza!" target="_blank" title="WhatsApp">
+                    <img src="https://img.icons8.com/?size=100&id=A1JUR9NRH7sC&format=png&color=000000" alt="WhatsApp" />
+                </a>
+            </div>
+        </section>
 
         <script>
             let lastScrollTop = 0;
@@ -435,8 +688,8 @@
                 });
             });
 
-            const nameText = "Your Name";
-            const roleText = "Software Engineer";
+            const nameText = "Hamza LARBI";
+            const roleText = "Qt/C++ Software Engineer";
             const nameElem = document.getElementById("hero-name");
             const roleElem = document.getElementById("hero-role");
 
@@ -462,10 +715,11 @@
 
             window.onload = typeName;
 
-            // Modal logic
             const modal = document.getElementById("project-modal");
             const modalImg = document.getElementById("modal-image");
             const modalCompany = document.getElementById("modal-company");
+            const modalCompanyDescription = document.getElementById("modal-company-description");
+            const modalRoleLocation = document.getElementById("modal-role-location");
             const modalRole = document.getElementById("modal-role");
             const modalDates = document.getElementById("modal-dates");
             const modalDesc = document.getElementById("modal-description");
@@ -473,12 +727,16 @@
 
             document.querySelectorAll(".project-card").forEach((card) => {
                 card.addEventListener("click", () => {
+                    // tech cards are non-interactive (have tech-card class)
+                    if (card.classList.contains("tech-card")) return;
                     modal.classList.add("show");
-                    modalImg.src = card.querySelector("img").src;
-                    modalCompany.textContent = card.dataset.company;
-                    modalRole.textContent = card.dataset.role;
-                    modalDates.textContent = card.dataset.dates;
-                    modalDesc.textContent = card.dataset.description;
+                    modalImg.src = card.querySelector("img")?.src || "";
+                    modalCompany.textContent = card.dataset.company || "";
+                    modalRole.textContent = card.dataset.role || "";
+                    modalRoleLocation.textContent = card.dataset.roleLocation || "";
+                    modalDates.textContent = card.dataset.dates || "";
+                    modalDesc.textContent = card.dataset.description || "";
+                    modalCompanyDescription.textContent = card.dataset.companyDescription || "";
                 });
             });
 
@@ -491,4 +749,7 @@
             });
         </script>
     </body>
+    <footer style="text-align: center; color: var(--text-light); padding: 15px; background-color: var(--glass-green); position: relative; bottom: 0; width: 100%;">
+    Built with ❤️ by Hamza
+</footer>
 </html>
