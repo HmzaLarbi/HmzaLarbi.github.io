@@ -1,318 +1,755 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Hamza | Portfolio</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://kit.fontawesome.com/a2e0e6adf6.js" crossorigin="anonymous"></script>
-        <script>
-            // Enable dark mode with class strategy
-            tailwind.config = {
-                darkMode: "class",
-            };
-        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <title>Portfolio</title>
+        <style>
+            :root {
+                --bg-dark: #05110a;
+                --glass-green: rgba(0, 255, 153, 0.1);
+                --border-green: rgba(0, 255, 153, 0.25);
+                --text-light: #e6fff5;
+                --accent-green: #00ff99;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                margin: 0;
+                height: 100vh;
+                background-color: var(--bg-dark);
+                color: var(--text-light);
+                font-family: "ubuntu", sans-serif;
+                overflow-x: hidden;
+                width: 100vw;
+            }
+
+            #background {
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                overflow: hidden;
+                animation: wave 20s ease-in-out infinite;
+                transform-origin: center;
+            }
+
+            /* Circles */
+            .circle {
+                position: absolute;
+                border-radius: 50%;
+                mix-blend-mode: overlay;
+                filter: blur(10px);
+                opacity: 0.4;
+                animation: float 12s ease-in-out infinite alternate;
+            }
+
+            @keyframes float {
+                0% {
+                    transform: translateY(0px) translateX(0px);
+                }
+                100% {
+                    transform: translateY(-40px) translateX(20px);
+                }
+            }
+
+            @keyframes wave {
+                0% {
+                    transform: rotate(0deg) scale(1);
+                }
+                50% {
+                    transform: rotate(1deg) scale(1.2);
+                }
+                100% {
+                    transform: rotate(0deg) scale(1);
+                }
+            }
+
+            nav {
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 255, 153, 0.05);
+                border: 1px solid var(--border-green);
+                border-radius: 20px;
+                padding: 12px 40px;
+                display: flex;
+                gap: 40px;
+                justify-content: center;
+                align-items: center;
+                z-index: 10;
+                backdrop-filter: blur(10px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+
+            nav.hidden-up {
+                opacity: 0;
+                transform: translateY(-40px);
+                pointer-events: none;
+            }
+
+            nav a {
+                text-decoration: none;
+                color: var(--text-light);
+                font-weight: 500;
+                font-size: 1rem;
+                transition: color 0.3s ease;
+            }
+
+            nav a:hover {
+                color: var(--accent-green);
+            }
+
+            .hero {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                position: relative;
+                z-index: 1;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+                font-weight: 400;
+                color: var(--accent-green);
+                margin-top: 10px;
+            }
+
+            section {
+                max-width: 900px;
+                margin: 100px auto;
+                padding: 40px;
+                background: rgba(0, 255, 153, 0.05);
+                border: 1px solid var(--border-green);
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+                z-index: 1;
+                position: relative;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                font-weight: 700;
+                text-decoration: underline;
+                color: var(--accent-green);
+                margin: 60px auto 20px auto;
+                text-align: center;
+            }
+
+            .skills-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                gap: 20px;
+            }
+
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                gap: 24px;
+            }
+            
+            .projects-grid > :first-child {
+    grid-column: span 2; /* Make the first item span across both columns */
+}
+
+            .project-card {
+                position: relative;
+                border-radius: 16px;
+                overflow: hidden;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                min-height: 100px;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+                border: 1px solid rgba(255, 255, 255, 0.02);
+            }
+
+            .project-card:hover {
+                transform: scale(1.03);
+                box-shadow: 0 10px 25px rgba(0, 255, 153, 0.15);
+            }
+
+            .project-card img {
+                width: 100%;
+                height: 240px;
+                object-fit: cover;
+                border-radius: 16px;
+                display: block;
+            }
+
+            .tech-info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, 0.8) 0%,
+                    rgba(0, 0, 0, 0.4) 60%,
+                    transparent 100%
+                );
+                color: white;
+                border-radius: 0 0 16px 16px;
+            }
+
+            .tech-card .tech-info {
+                position: static;
+                width: auto;
+                padding: 20px;
+                border-radius: 12px;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
+                text-align: center;
+                margin: 10px;
+            }
+
+            .tech-card .tech-info h4 {
+                color: var(--accent-green);
+                font-size: 1rem;
+            }
+
+            .tech-card .tech-info p {
+                color: var(--text-light);
+                opacity: 0.9;
+                margin-top: 8px;
+                font-size: 0.95rem;
+            }
+
+            /* PROJECT SECTION */
+            .project-info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 15px;
+                background: linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, 0.8) 0%,
+                    rgba(0, 0, 0, 0.4) 60%,
+                    transparent 100%
+                );
+                color: var(--text-light);
+                border-radius: 0 0 16px 16px;
+                display: flex; /* align h4 and p in one row */
+                align-items: center; /* vertically center */
+                gap: 10px; /* small space between h4 and p */
+            }
+
+            .project-info h4 {
+                font-size: 1.3rem;
+                font-weight: bold;
+                color: var(--accent-green);
+                margin: 0;
+            }
+
+            .project-info p {
+                font-size: 1rem;
+                font-weight: normal;
+                color: rgba(255, 255, 255, 0.6);
+                margin: 0;
+            }
+
+            /* CONTACT SECTION */
+            .contact-icons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+
+            .contact-icons a {
+                display: inline-block;
+                transition: transform 0.3s ease, filter 0.3s ease;
+            }
+
+            .contact-icons img {
+                width: 60px;
+                height: 60px;
+                filter: drop-shadow(0 0 4px rgba(0, 255, 153, 0.4));
+            }
+
+            .contact-icons a:hover {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 10px var(--accent-green));
+            }
+
+            .modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 100;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+
+            .modal.show {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .modal-content {
+                background: rgba(10, 25, 15, 0.95);
+                border: 1px solid var(--border-green);
+                border-radius: 20px;
+                padding: 20px;
+                width: 90%;
+                max-width: 600px;
+                color: var(--text-light);
+                animation: fadeIn 0.4s ease;
+            }
+
+            .modal-content img {
+                width: 100%;
+                border-radius: 16px;
+                margin-bottom: 15px;
+            }
+
+            .modal-content h3 {
+                margin: 0;
+                font-size: 1.4rem;
+                color: var(--accent-green);
+            }
+
+            .modal-content p {
+                margin: 5px 0;
+                line-height: 1.6;
+            }
+
+            .close-btn {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: color 0.3s ease;
+            }
+
+            .close-btn:hover {
+                color: var(--accent-green);
+            }
+
+            @keyframes fadeIn {
+                from {
+                    transform: translateY(-20px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .cursor {
+                display: inline-block;
+                width: 2px;
+                height: 1.2em;
+                background-color: var(--accent-green);
+                margin-left: 4px;
+                animation: blink 1s infinite;
+            }
+
+            @keyframes blink {
+                0%,
+                50%,
+                100% {
+                    opacity: 1;
+                }
+                25%,
+                75% {
+                    opacity: 0;
+                }
+            }
+
+            /* Responsive tweaks */
+            @media (max-width: 600px) {
+                .hero h1 {
+                    font-size: 2.5rem;
+                }
+
+                .projects-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
     </head>
-    <body class="bg-gray-100 dark:bg-gray-900 font-sans transition-colors duration-300">
-        <!-- Fixed Theme Toggle -->
-        <button
-            id="theme-toggle"
-            class="fixed top-4 right-4 px-3 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg shadow hover:scale-105 transition z-50"
-        >
-            🌗
-        </button>
+    <body>
+        <nav id="navbar">
+            <a href="#about">About Me</a>
+            <a href="#techstack">Tech Stack</a>
+            <a href="#projects">My Projects</a>
+            <a href="#contact">Contact Me</a>
+            <a href="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/cv.pdf">Curriculum Vitae</a>
+        </nav>
+        <div id="background"></div>
+        <script>
+            const background = document.getElementById("background");
 
-        <!-- Container -->
-        <div class="flex justify-center items-start min-h-screen p-6">
-            <div
-                class="flex w-full max-w-6xl bg-white dark:bg-gray-800 shadow-2xl rounded-2xl overflow-hidden transition-colors duration-300"
-            >
-                <!-- Left Column -->
-                <div
-                    class="w-1/4 bg-gray-50 dark:bg-gray-700 p-6 flex flex-col items-center border-r border-gray-200 dark:border-gray-600 transition-colors duration-300"
-                >
-                    <!-- Profile Image -->
-                    <div class="w-40 h-40 rounded-[20px] overflow-hidden shadow-md">
-                        <img
-                            src="https://avatars.githubusercontent.com/HmzaLarbi"
-                            alt="Profile picture"
-                            class="w-full h-full object-cover"
-                        />
-                    </div>
+            // Number of circles
+            const circleCount = 12;
 
-                    <!-- Contact Info -->
-                    <ul class="mt-6 space-y-4 text-gray-700 dark:text-gray-200 w-full">
-                        <li class="flex items-center space-x-3">
-                            <i class="fas fa-envelope text-blue-500"></i>
-                            <a href="mailto:youremail@example.com" class="hover:underline"
-                                >youremail@example.com</a
-                            >
-                        </li>
-                        <li class="flex items-center space-x-3">
-                            <i class="fas fa-phone text-green-500"></i>
-                            <span>+123 456 789</span>
-                        </li>
-                        <li class="flex items-center space-x-3">
-                            <i class="fas fa-map-marker-alt text-red-500"></i>
-                            <span>Algeria</span>
-                        </li>
-                    </ul>
+            for (let i = 0; i < circleCount; i++) {
+                const circle = document.createElement("div");
+                circle.classList.add("circle");
 
-                    <!-- Social Links -->
-                    <div class="flex space-x-6 mt-auto pt-8">
-                        <a
-                            href="https://github.com/"
-                            target="_blank"
-                            class="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white text-2xl"
-                        >
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a
-                            href="https://linkedin.com/"
-                            target="_blank"
-                            class="text-blue-700 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-200 text-2xl"
-                        >
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a
-                            href="https://stackoverflow.com/"
-                            target="_blank"
-                            class="text-orange-600 dark:text-orange-400 hover:text-orange-800 dark:hover:text-orange-200 text-2xl"
-                        >
-                            <i class="fab fa-stack-overflow"></i>
-                        </a>
+                const size = 150 + Math.random() * 400;
+                circle.style.width = `${size}px`;
+                circle.style.height = `${size}px`;
+                circle.style.top = `${Math.random() * 100}%`;
+                circle.style.left = `${Math.random() * 100}%`;
+
+                const hue = Math.random() * 360;
+                circle.style.background = `radial-gradient(circle, hsl(${hue}, 70%, 60%), transparent 70%)`;
+
+                circle.style.animationDuration = `${10 + Math.random() * 10}s`;
+                circle.style.animationDelay = `${Math.random() * 5}s`;
+
+                background.appendChild(circle);
+            }
+        </script>
+
+        <div class="hero">
+            <h1 id="hero-name"></h1>
+            <h2 id="hero-role"></h2>
+        </div>
+
+        <h2 id="about" class="section-title">About Me</h2>
+        <section>
+            <p>
+                I'm a passionate Software Engineer who lives and breathes code. My journey in tech
+                began early, driven by curiosity—and since starting my professional career in 2021,
+                I’ve been building solid, scalable software ever since.
+            </p>
+
+            <h3>What I Do</h3>
+            <ul>
+                <li>
+                    Specialized in C++/Qt, especially QtQuick/QML for modern desktop and embedded
+                    Linux applications.
+                </li>
+                <li>
+                    Working with Qt 5 & 6, C++17–20, and building production-ready software with
+                    clean, maintainable architecture.
+                </li>
+                <li>
+                    A strong eye for UI/UX design using Figma, ensuring great user experiences
+                    alongside functional code.
+                </li>
+                <li>
+                    Currently freelancing with BYB Tech Srl, contributing to cross-platform tools
+                    and real-time systems.
+                </li>
+            </ul>
+
+            <h3>What I'm Exploring</h3>
+            <ul>
+                <li>Diving into automotive communication protocols (CAN, LIN, etc.).</li>
+                <li>
+                    Interested in projects that combine software, electronics, and wireless
+                    communication.
+                </li>
+            </ul>
+
+            <p>
+                I'm ambitious, a fast learner, and truly enjoy working on meaningful software that
+                solves real problems.
+            </p>
+        </section>
+
+        <h2 id="techstack" class="section-title">Tech Stack</h2>
+        <section>
+            <div class="skills-grid">
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Programming Languages</h4>
+                        <p>C, C++, Arduino</p>
                     </div>
                 </div>
-
-                <!-- Right Column -->
-                <div class="w-3/4 p-8 relative transition-colors duration-300">
-                    <!-- Tabs -->
-                    <div
-                        class="flex justify-end mb-6 space-x-6 text-gray-600 dark:text-gray-300 font-semibold"
-                    >
-                        <button
-                            class="tab-btn text-blue-600 border-b-2 border-blue-600 pb-1"
-                            data-tab="about"
-                        >
-                            About Me
-                        </button>
-                        <button class="tab-btn hover:text-blue-600" data-tab="resume">
-                            Resume
-                        </button>
-                        <button class="tab-btn hover:text-blue-600" data-tab="portfolio">
-                            Portfolio
-                        </button>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Frameworks & Libraries</h4>
+                        <p>Qt</p>
                     </div>
-
-                    <!-- About Me -->
-                    <div id="about" class="tab-content">
-                        <p class="text-gray-700 dark:text-gray-200 leading-relaxed mb-8">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim,
-                            nunc et pretium tincidunt...
-                        </p>
-
-                        <!-- What I Do Cards -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                            <div
-                                class="flex items-center bg-gray-50 dark:bg-gray-700 p-4 rounded-xl shadow"
-                            >
-                                <i class="fas fa-code text-blue-500 text-2xl mr-4"></i>
-                                <span class="dark:text-gray-200"
-                                    >Developing Desktop and Embedded Software</span
-                                >
-                            </div>
-                            <div
-                                class="flex items-center bg-gray-50 dark:bg-gray-700 p-4 rounded-xl shadow"
-                            >
-                                <i class="fas fa-microchip text-green-500 text-2xl mr-4"></i>
-                                <span class="dark:text-gray-200">IoT & Embedded Systems</span>
-                            </div>
-                            <div
-                                class="flex items-center bg-gray-50 dark:bg-gray-700 p-4 rounded-xl shadow"
-                            >
-                                <i class="fas fa-database text-purple-500 text-2xl mr-4"></i>
-                                <span class="dark:text-gray-200">Database Management</span>
-                            </div>
-                            <div
-                                class="flex items-center bg-gray-50 dark:bg-gray-700 p-4 rounded-xl shadow"
-                            >
-                                <i class="fas fa-cogs text-orange-500 text-2xl mr-4"></i>
-                                <span class="dark:text-gray-200">DevOps & Automation</span>
-                            </div>
-                        </div>
-
-                        <!-- Skills -->
-                        <div>
-                            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                                Skills
-                            </h2>
-                            <div class="space-y-4">
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">
-                                        Programming Languages
-                                    </h3>
-                                    <div class="flex flex-wrap gap-2 mt-2">
-                                        <span
-                                            class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-lg text-sm"
-                                            >C</span
-                                        >
-                                        <span
-                                            class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-lg text-sm"
-                                            >C++</span
-                                        >
-                                        <span
-                                            class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-lg text-sm"
-                                            >Arduino</span
-                                        >
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">
-                                        Frameworks & Libraries
-                                    </h3>
-                                    <span
-                                        class="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-lg text-sm"
-                                        >Qt</span
-                                    >
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">Databases</h3>
-                                    <span
-                                        class="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-lg text-sm"
-                                        >MySQL</span
-                                    >
-                                    <span
-                                        class="px-3 py-1 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 rounded-lg text-sm"
-                                        >SQLite</span
-                                    >
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">DevOps / CI-CD</h3>
-                                    <span
-                                        class="px-3 py-1 bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 rounded-lg text-sm"
-                                        >Docker</span
-                                    >
-                                    <span
-                                        class="px-3 py-1 bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 rounded-lg text-sm"
-                                        >GitHub Actions</span
-                                    >
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">
-                                        Version Control
-                                    </h3>
-                                    <span
-                                        class="px-3 py-1 bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-100 rounded-lg text-sm"
-                                        >Git</span
-                                    >
-                                    <span
-                                        class="px-3 py-1 bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-100 rounded-lg text-sm"
-                                        >GitHub</span
-                                    >
-                                    <span
-                                        class="px-3 py-1 bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-100 rounded-lg text-sm"
-                                        >Bitbucket</span
-                                    >
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">
-                                        Project Management
-                                    </h3>
-                                    <span
-                                        class="px-3 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded-lg text-sm"
-                                        >Jira</span
-                                    >
-                                    <span
-                                        class="px-3 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 rounded-lg text-sm"
-                                        >Trello</span
-                                    >
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">Design Tools</h3>
-                                    <span
-                                        class="px-3 py-1 bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200 rounded-lg text-sm"
-                                        >Figma</span
-                                    >
-                                    <span
-                                        class="px-3 py-1 bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200 rounded-lg text-sm"
-                                        >Canva</span
-                                    >
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">
-                                        API Testing Tools
-                                    </h3>
-                                    <span
-                                        class="px-3 py-1 bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 rounded-lg text-sm"
-                                        >Postman</span
-                                    >
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold dark:text-gray-200">
-                                        Operating Systems
-                                    </h3>
-                                    <span
-                                        class="px-3 py-1 bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 rounded-lg text-sm"
-                                        >macOS</span
-                                    >
-                                    <span
-                                        class="px-3 py-1 bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 rounded-lg text-sm"
-                                        >Windows</span
-                                    >
-                                    <span
-                                        class="px-3 py-1 bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 rounded-lg text-sm"
-                                        >Linux</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Databases</h4>
+                        <p>MySQL, SQLite</p>
                     </div>
-
-                    <!-- Resume -->
-                    <div id="resume" class="tab-content hidden">
-                        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                            Resume
-                        </h2>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            Add your resume content here...
-                        </p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>DevOps / CI-CD</h4>
+                        <p>Docker, GitHub Actions</p>
                     </div>
-
-                    <!-- Portfolio -->
-                    <div id="portfolio" class="tab-content hidden">
-                        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                            Portfolio
-                        </h2>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            Add your portfolio projects here...
-                        </p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Version Control</h4>
+                        <p>Git, GitHub, Bitbucket</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Project Management</h4>
+                        <p>Jira, Trello</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Design Tools</h4>
+                        <p>Figma, Canva</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>API Testing Tools</h4>
+                        <p>Postman</p>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-info">
+                        <h4>Operating Systems</h4>
+                        <p>macOS, Windows, Linux</p>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <h2 id="projects" class="section-title">My Projects</h2>
+        <section>
+            <div class="projects-grid">
+                <div
+                    class="project-card"
+                    data-company="BYB Tech Srl"
+                    data-role="Qt/C++ Software Engineer"
+                    data-company-description="BYB Tech Srl is a leading provider of advanced telemetry and data acquisition solutions for the cycling industry."
+                    data-dates="05/2022 - Present"
+                    data-role-location="Italy - Brescia (Remote)"
+                    data-description="Developed cross-platform Qt applications, refactored legacy codebases, and implemented real-time data visualization dashboards."
+                >
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/bybtech.png" alt="BYB Tech Srl" />
+                    <div class="project-info">
+                        <h4>BYB Tech Srl</h4> 
+                    </div>
+                </div>
+
+                <div
+                    class="project-card"
+                    data-company="Power Gauge Pro"
+                    data-role="Qt/C++ Software Developer for embedded systems"
+                    data-company-description="Power Gauge Pro is a cutting-edge developer of customizable digital dashboards and instrument clusters for real-time vehicle data and diagnostics."
+                    data-dates="09/2024 - 04/2025"
+                    data-role-location="United States - Michigan (Remote)"
+                    data-description="Built and tested a user interface for an embedded device with a focus on smooth visuals and real-time updates. Integrated system features such as Wi-Fi, sensors, and communication ports to enable data collection and control. Completely redesigned the interface from scratch based on a custom Figma design, enhancing both usability and visual appeal."
+                >
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/powergaugepro.png" alt="Power Gauge Pro" />
+                    <div class="project-info">
+                        <h4>Power Gauge Pro</h4> 
+                    </div>
+                </div>
+
+                <div
+                    class="project-card"
+                    data-company="VersaWare"
+                    data-role="Qt/C++ Software Developer"
+                    data-company-description="VersaWare is a software solutions company specializing in embedded systems and IoT applications."
+                    data-dates="01/2023 - 03/2023"
+                    data-role-location="United States - Michigan (Remote)"
+                    data-description="Implemented new components for the front-end user interface (UI), incorporating fully customized components and animations to enhance user experience."
+                >
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/versaware.png" alt="VersaWare" />
+                    <div class="project-info">
+                        <h4>VersaWare</h4> 
+                    </div>
+                </div>
+
+                 <div
+                    class="project-card"
+                    data-company="Amnezia"
+                    data-role="Qt/C++ Software Developer"
+                    data-company-description="Amnezia VPN is a leading provider of secure and private internet access solutions."
+                    data-dates="09/2023 - 01/2024"
+                    data-role-location="Open-source (Remote)"
+                    data-description="I had the opportunity to work on this project for several months, contributing to the modernization of the user interface and initiating the upgrade from Qt 5.6 to Qt 6.3."
+                >
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/amneziavpn.png" alt="Amnezia" />
+                    <div class="project-info">
+                        <h4>Amnezia</h4> 
+                    </div>
+                </div>
+
+                <div
+                    class="project-card"
+                    data-company="Flybotix"
+                    data-role="Qt/C++ Software Developer"
+                    data-company-description="Flybotix is a company specializing in drone technology and software solutions."
+                    data-dates="01/2021 - 01/2022"
+                    data-role-location="Switzerland - Renens (Remote)"
+                    data-description="Redesigned the user interface from a light theme to a modern dark theme using updated components. Added support for IR images and an interactive 3D view. Implemented advanced POI management from the main view, allowing users to view and edit detailed information on the right panel, which can be exported in reports. Additionally, integrated search, filter, delete, and hide functionalities for improved usability and data handling."
+                >
+                    <img src="https://github.com/HmzaLarbi/HmzaLarbi.github.io/blob/main/resources/flybotix.png" alt="Flybotix" />
+                    <div class="project-info">
+                        <h4>Flybotix</h4> 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal" id="project-modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-modal">&times;</span>
+                <img id="modal-image" src="" alt="Project Image" />
+                <h3 id="modal-company"
+                style="display: inline-block"></p>
+                ></h3>
+                <p
+                    id="modal-role-location"
+                    style="color: #aaa; font-size: 0.9rem; display: inline-block; margin-left: 15px"
+                ></p>
+                <br />
+                <p id="modal-role" >  </p>
+                <p id="modal-dates" style="color: #aaa; font-size: 0.9rem; font-style: italic"></p>
+                <p id="modal-description"></p>
+                <hr style="opacity: 0.4;">
+                <p id="modal-company-description" style="color: #aaa; font-size: 0.9rem; font-style: italic"></p>
+            </div>
         </div>
 
-        <!-- JS for Tabs & Theme -->
+        <h2 id="contact" class="section-title">Contact Me</h2>
+        <section>
+            <div class="contact-icons">
+                <a href="https://github.com/HmzaLarbi" target="_blank" title="GitHub">
+                    <img
+                        src="https://img.icons8.com/?size=100&id=LoL4bFzqmAa0&format=png&color=000000"
+                        alt="GitHub"
+                    />
+                </a>
+                <a href="https://linkedin.com/in/larbihamza" target="_blank" title="LinkedIn">
+                    <img
+                        src="https://img.icons8.com/?size=100&id=kBCrQMzpQDLQ&format=png&color=000000"
+                        alt="LinkedIn"
+                    />
+                </a>
+                <a href="mailto:larbi0hamza@gmail.com" title="Email">
+                    <img src="https://img.icons8.com/?size=100&id=Iq5AZypojpBD&format=png&color=000000" alt="Email" />
+                </a>
+                <a href="https://wa.me/213699543035?text=Hello%20Hamza!" target="_blank" title="WhatsApp">
+                    <img src="https://img.icons8.com/?size=100&id=A1JUR9NRH7sC&format=png&color=000000" alt="WhatsApp" />
+                </a>
+            </div>
+        </section>
+
         <script>
-            // Tab switching
-            const tabs = document.querySelectorAll(".tab-btn");
-            const contents = document.querySelectorAll(".tab-content");
-            tabs.forEach((tab) => {
-                tab.addEventListener("click", () => {
-                    tabs.forEach((t) =>
-                        t.classList.remove("text-blue-600", "border-b-2", "border-blue-600")
-                    );
-                    contents.forEach((c) => c.classList.add("hidden"));
-                    tab.classList.add("text-blue-600", "border-b-2", "border-blue-600");
-                    document.getElementById(tab.dataset.tab).classList.remove("hidden");
+            let lastScrollTop = 0;
+            const navbar = document.getElementById("navbar");
+
+            window.addEventListener("scroll", () => {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScroll > lastScrollTop) {
+                    navbar.classList.add("hidden-up");
+                } else {
+                    navbar.classList.remove("hidden-up");
+                }
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            });
+
+            document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute("href"));
+                    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
                 });
             });
 
-            // Theme toggle
-            const themeToggle = document.getElementById("theme-toggle");
-            const html = document.documentElement;
-            themeToggle.addEventListener("click", () => {
-                html.classList.toggle("dark");
+            const nameText = "Hamza LARBI";
+            const roleText = "Qt/C++ Software Engineer";
+            const nameElem = document.getElementById("hero-name");
+            const roleElem = document.getElementById("hero-role");
+
+            let nameIndex = 0;
+            function typeName() {
+                if (nameIndex < nameText.length) {
+                    nameElem.textContent += nameText.charAt(nameIndex);
+                    nameIndex++;
+                    setTimeout(typeName, 100);
+                } else {
+                    setTimeout(typeRole, 400);
+                }
+            }
+
+            let roleIndex = 0;
+            function typeRole() {
+                if (roleIndex < roleText.length) {
+                    roleElem.textContent += roleText.charAt(roleIndex);
+                    roleIndex++;
+                    setTimeout(typeRole, 80);
+                }
+            }
+
+            window.onload = typeName;
+
+            const modal = document.getElementById("project-modal");
+            const modalImg = document.getElementById("modal-image");
+            const modalCompany = document.getElementById("modal-company");
+            const modalCompanyDescription = document.getElementById("modal-company-description");
+            const modalRoleLocation = document.getElementById("modal-role-location");
+            const modalRole = document.getElementById("modal-role");
+            const modalDates = document.getElementById("modal-dates");
+            const modalDesc = document.getElementById("modal-description");
+            const closeModal = document.getElementById("close-modal");
+
+            document.querySelectorAll(".project-card").forEach((card) => {
+                card.addEventListener("click", () => {
+                    // tech cards are non-interactive (have tech-card class)
+                    if (card.classList.contains("tech-card")) return;
+                    modal.classList.add("show");
+                    modalImg.src = card.querySelector("img")?.src || "";
+                    modalCompany.textContent = card.dataset.company || "";
+                    modalRole.textContent = card.dataset.role || "";
+                    modalRoleLocation.textContent = card.dataset.roleLocation || "";
+                    modalDates.textContent = card.dataset.dates || "";
+                    modalDesc.textContent = card.dataset.description || "";
+                    modalCompanyDescription.textContent = card.dataset.companyDescription || "";
+                });
+            });
+
+            closeModal.addEventListener("click", () => {
+                modal.classList.remove("show");
+            });
+
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) modal.classList.remove("show");
             });
         </script>
     </body>
+    <footer style="text-align: center; color: var(--text-light); padding: 15px; background-color: var(--glass-green); position: relative; bottom: 0; width: 100%;">
+    Built with ❤️ by Hamza
+</footer>
 </html>
