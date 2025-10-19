@@ -34,10 +34,9 @@ body {
 /* Circles */
 .circle {
     position: absolute;
+    opacity: 0.2;
     border-radius: 50%;
     mix-blend-mode: overlay;
-    filter: blur(10px);
-    opacity: 0.4;
     animation: float 12s ease-in-out infinite alternate;
 }
 

@@ -8,7 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Anta&family=Ubuntu:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
-        <title>Hamza LARBI</title>
+        <title>Hamza - Portfolio</title>
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
@@ -37,16 +37,14 @@
                 circle.style.left = `${Math.random() * 100}%`;
 
                 const hue = Math.random() * 360;
-                circle.style.background = `radial-gradient(circle, hsl(${hue}, 70%, 60%), transparent 70%)`;
+                circle.style.background = `linear-gradient(to top, hsl(${hue}, 70%, 60%) 0%, hsla(${hue}, 70%, 60%, 0.1) 100%)`; 
 
                 circle.style.animationDuration = `${10 + Math.random() * 10}s`;
                 circle.style.animationDelay = `${Math.random() * 5}s`;
 
                 background.appendChild(circle);
             }
-        </script>
-        
-        <script>
+
             // Notify visit :)
             fetch("https://notify-visit.hamza-arbi-15-cloudflare-4d2.workers.dev/");
         </script>
@@ -213,7 +211,7 @@
                     data-company="Power Gauge Pro"
                     data-role="Qt/C++ Software Developer for embedded systems"
                     data-company-description="Power Gauge Pro is a cutting-edge developer of customizable digital dashboards and instrument clusters for real-time vehicle data and diagnostics."
-                    data-dates="09/2024 - 04/2025"
+                    data-dates="09/2024 - 04/2025 (8 months)"
                     data-role-location="United States - Michigan (Remote)"
                     data-description="Built and tested a user interface for an embedded device with a focus on smooth visuals and real-time updates. Integrated system features such as Wi-Fi, sensors, and communication ports to enable data collection and control. Completely redesigned the interface from scratch based on a custom Figma design, enhancing both usability and visual appeal."
                 >
@@ -228,7 +226,7 @@
                     data-company="VersaWare"
                     data-role="Qt/C++ Software Developer"
                     data-company-description="VersaWare is a software solutions company specializing in embedded systems and IoT applications."
-                    data-dates="01/2023 - 03/2023"
+                    data-dates="01/2023 - 03/2023 (3 months)"
                     data-role-location="United States - Michigan (Remote)"
                     data-description="Implemented new components for the front-end user interface (UI), incorporating fully customized components and animations to enhance user experience."
                 >
@@ -243,7 +241,7 @@
                     data-company="Amnezia"
                     data-role="Qt/C++ Software Developer"
                     data-company-description="Amnezia VPN is a leading provider of secure and private internet access solutions."
-                    data-dates="09/2023 - 01/2024"
+                    data-dates="09/2023 - 01/2024 (5 months)"
                     data-role-location="Open-source (Remote)"
                     data-description="I had the opportunity to work on this project for several months, contributing to the modernization of the user interface and initiating the upgrade from Qt 5.6 to Qt 6.3."
                 >
@@ -258,7 +256,7 @@
                     data-company="Flybotix"
                     data-role="Qt/C++ Software Developer"
                     data-company-description="Flybotix is a company specializing in drone technology and software solutions."
-                    data-dates="01/2021 - 01/2022"
+                    data-dates="02/2021 - 02/2022 (1 year)"
                     data-role-location="Switzerland - Renens (Remote)"
                     data-description="Redesigned the user interface from a light theme to a modern dark theme using updated components. Added support for IR images and an interactive 3D view. Implemented advanced POI management from the main view, allowing users to view and edit detailed information on the right panel, which can be exported in reports. Additionally, integrated search, filter, delete, and hide functionalities for improved usability and data handling."
                 >
@@ -398,6 +396,6 @@
         </script>
     </body>
     <footer style="text-align: center; color: var(--text-light); padding: 15px; background-color: var(--glass-green); position: relative; bottom: 0; width: 100%;">
-    Built with ❤️ by Hamza
+    Built with ❤️ by Hamza from Algeria 🇩🇿.
 </footer>
 </html>
