@@ -1,401 +1,496 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Hamza's portfolio showcasing freelance work history and tech stack." />
-        <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/twitter/twemoji/refs/heads/master/assets/svg/1f575.svg">
+        <meta
+            name="description"
+            content="Hamza's portfolio showcasing freelance work history and tech stack."
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            href="https://raw.githubusercontent.com/twitter/twemoji/refs/heads/master/assets/svg/1f575.svg"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Anta&family=Ubuntu:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
-        <title>Hamza - Portfolio</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Zen+Dots&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>Hamza — Portfolio</title>
+
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
+        <!-- ── BACKGROUND ─────────────────────────────────────── -->
+        <div id="bg-canvas"></div>
+
+        <!-- ── NAV ────────────────────────────────────────────── -->
         <nav id="navbar">
-            <a href="#about">About Me</a>
-            <a href="#techstack">Tech Stack</a>
-            <a href="#projects">Work history</a>
-            <a href="#contact">Contact Me</a>
-            <a href="resources/Hamza-Larbi-Curriculum-Vitae.pdf">Curriculum Vitae</a>
+            <a href="#about">About</a>
+            <a href="#techstack">Stack</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+            <a href="resources/Hamza-Larbi-Curriculum-Vitae.pdf">CV ↗</a>
         </nav>
-        <div id="background"></div>
-        <script>
-            const background = document.getElementById("background");
 
-            // Number of circles
-            const circleCount = 12;
+        <!-- ── HERO ───────────────────────────────────────────── -->
+        <section class="hero">
+            <p class="hero-eyebrow">Qt / C++ Software Engineer · Algeria 🇩🇿</p>
+            <h1>Hamza<span>LARBI</span></h1>
+            <div class="hero-role">
+                <div class="hero-line"></div>
+                <p class="hero-role-text">
+                    Building real-time systems & elegant interfaces since 2021
+                </p>
+            </div>
+            <div class="hero-scroll">
+                <div class="scroll-bar"></div>
+                <span>scroll</span>
+            </div>
+        </section>
 
-            for (let i = 0; i < circleCount; i++) {
-                const circle = document.createElement("div");
-                circle.classList.add("circle");
+        <!-- ── ABOUT ──────────────────────────────────────────── -->
+        <div id="about" class="section-wrap">
+            <p class="section-label">Profile</p>
+            <h2 class="section-heading reveal">About Me</h2>
 
-                const size = 150 + Math.random() * 400;
-                circle.style.width = `${size}px`;
-                circle.style.height = `${size}px`;
-                circle.style.top = `${Math.random() * 100}%`;
-                circle.style.left = `${Math.random() * 100}%`;
+            <div class="about-grid">
+                <div class="about-main glass reveal reveal-delay-1">
+                    <p>
+                        I'm a passionate Software Engineer who lives and breathes code. My journey
+                        in tech began early, driven by curiosity — and since starting my
+                        professional career in 2021, I've been building solid, scalable software
+                        ever since. I'm ambitious, a fast learner, and truly enjoy working on
+                        meaningful software that solves real problems.
+                    </p>
+                </div>
 
-                const hue = Math.random() * 360;
-                circle.style.background = `linear-gradient(to top, hsl(${hue}, 70%, 60%) 0%, hsla(${hue}, 70%, 60%, 0.1) 100%)`; 
+                <div class="about-card glass reveal reveal-delay-2">
+                    <h4>What I Do</h4>
+                    <ul>
+                        <li>Specialized in C++/Qt — QtQuick/QML for desktop & embedded Linux.</li>
+                        <li>Qt 5 &amp; 6, C++17–20, production-ready architecture.</li>
+                        <li>Strong eye for UI/UX design using Figma.</li>
+                        <li>
+                            Freelancing with BYB Tech Srl on cross-platform &amp; real-time systems.
+                        </li>
+                    </ul>
+                </div>
 
-                circle.style.animationDuration = `${10 + Math.random() * 10}s`;
-                circle.style.animationDelay = `${Math.random() * 5}s`;
-
-                background.appendChild(circle);
-            }
-
-            // Notify visit :)
-            fetch("https://notify-visit.hamza-arbi-15-cloudflare-4d2.workers.dev/");
-        </script>
-
-        <div class="hero">
-            <h1 id="hero-name"></h1>
-            <h2 id="hero-role"></h2>
+                <div class="about-card glass reveal reveal-delay-3">
+                    <h4>What I'm Exploring</h4>
+                    <ul>
+                        <li>Automotive comms: CAN, LIN, and beyond.</li>
+                        <li>Projects combining software, electronics &amp; wireless comms.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <h2 id="about" class="section-title">About Me</h2>
-        <section>
-            <p>
-                I'm a passionate Software Engineer who lives and breathes code. My journey in tech
-                began early, driven by curiosity—and since starting my professional career in 2021,
-                I’ve been building solid, scalable software ever since, I'm ambitious, a fast learner, 
-                and truly enjoy working on meaningful software that solves real problems.
-            </p>
-
-            <h3 class="description-title">What I Do</h3>
-            <ul>
-                <li>
-                    Specialized in C++/Qt, especially QtQuick/QML for modern desktop and embedded
-                    Linux applications.
-                </li>
-                <li>
-                    Working with Qt 5 & 6, C++17–20, and building production-ready software with
-                    clean, maintainable architecture.
-                </li>
-                <li>
-                    A strong eye for UI/UX design using Figma, ensuring great user experiences
-                    alongside functional code.
-                </li>
-                <li>
-                    Currently freelancing with BYB Tech Srl, contributing to cross-platform tools
-                    and real-time systems.
-                </li>
-            </ul>
-
-            <h3 class="description-title">What I'm Exploring</h3>
-            <ul>
-                <li>Diving into automotive communication protocols (CAN, LIN, etc.).</li>
-                <li>
-                    Interested in projects that combine software, electronics, and wireless
-                    communication.
-                </li>
-            </ul>
-             
-        </section>
-            
-        <h2 class="section-title">Languages</h2>
-        <section>
-            <div class="language">
-                <span>English (Fluent - C1)</span>
-                <div class="dots">
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot"></span>
-                </div>
-            </div>
-            <div class="language">
-                <span>French (Fluent - C1)</span>
-                <div class="dots">
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot"></span>
-                </div>
-            </div>
-            <div class="language">
-                <span>Arabic (Native)</span>
-                <div class="dots">
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                    <span class="dot filled"></span>
-                </div>
-            </div>
-        </section>
-
-        <h2 id="techstack" class="section-title">Tech Stack</h2>
-        <section>
-            <div class="skills-grid">
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>Programming Languages</h4>
-                        <p>C, C++</p>
+        <!-- ── LANGUAGES ──────────────────────────────────────── -->
+        <div class="section-wrap" style="padding-top: 0">
+            <p class="section-label">Communication</p>
+            <h2 class="section-heading reveal">Languages</h2>
+            <div class="lang-grid">
+                <div class="lang-card glass reveal reveal-delay-1">
+                    <div>
+                        <div class="lang-name">English</div>
+                        <div class="lang-level">Fluent · C1</div>
+                    </div>
+                    <div class="lang-dots">
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot"></div>
                     </div>
                 </div>
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>Frameworks & Libraries</h4>
-                        <p>Qt, Espressif IoT, LVGL, Arduino</p>
+                <div class="lang-card glass reveal reveal-delay-2">
+                    <div>
+                        <div class="lang-name">French</div>
+                        <div class="lang-level">Fluent · C1</div>
+                    </div>
+                    <div class="lang-dots">
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot"></div>
                     </div>
                 </div>
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>Databases</h4>
-                        <p>MySQL, SQLite</p>
+                <div class="lang-card glass reveal reveal-delay-3">
+                    <div>
+                        <div class="lang-name">Arabic</div>
+                        <div class="lang-level">Native</div>
                     </div>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>DevOps / CI-CD</h4>
-                        <p>Docker, GitHub Actions</p>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>Version Control</h4>
-                        <p>Git, GitHub, Bitbucket</p>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>Project Management</h4>
-                        <p>Jira, Trello</p>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>Design Tools</h4>
-                        <p>Figma, Canva</p>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>API Testing Tools</h4>
-                        <p>Postman</p>
-                    </div>
-                </div>
-                <div class="tech-card">
-                    <div class="tech-info">
-                        <h4>Operating Systems</h4>
-                        <p>macOS, Windows, Linux</p>
+                    <div class="lang-dots">
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
+                        <div class="lang-dot on"></div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <h2 id="projects" class="section-title">Work history</h2>
-        <section>
-            <div class="projects-grid">
+        <!-- ── TECH STACK ─────────────────────────────────────── -->
+        <div id="techstack" class="section-wrap">
+            <p class="section-label">Toolbox</p>
+            <h2 class="section-heading reveal">Tech Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item glass reveal reveal-delay-1">
+                    <h4>Languages</h4>
+                    <p>C, C++</p>
+                </div>
+                <div class="tech-item glass reveal reveal-delay-2">
+                    <h4>Frameworks &amp; Libraries</h4>
+                    <p>Qt, Espressif IoT, LVGL, Arduino</p>
+                </div>
+                <div class="tech-item glass reveal reveal-delay-3">
+                    <h4>Databases</h4>
+                    <p>MySQL, SQLite</p>
+                </div>
+                <div class="tech-item glass reveal reveal-delay-1">
+                    <h4>DevOps / CI-CD</h4>
+                    <p>Docker, GitHub Actions</p>
+                </div>
+                <div class="tech-item glass reveal reveal-delay-2">
+                    <h4>Version Control</h4>
+                    <p>Git, GitHub, Bitbucket</p>
+                </div>
+                <div class="tech-item glass reveal reveal-delay-3">
+                    <h4>Project Management</h4>
+                    <p>Jira, Trello</p>
+                </div>
+                <div class="tech-item glass reveal reveal-delay-1">
+                    <h4>Design Tools</h4>
+                    <p>Figma, Canva</p>
+                </div>
+                <div class="tech-item glass reveal reveal-delay-2">
+                    <h4>API Testing</h4>
+                    <p>Postman</p>
+                </div>
+                <div class="tech-item glass reveal reveal-delay-3">
+                    <h4>Operating Systems</h4>
+                    <p>macOS, Windows, Linux</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── WORK HISTORY ───────────────────────────────────── -->
+        <div id="work" class="section-wrap">
+            <p class="section-label">Experience</p>
+            <h2 class="section-heading reveal">Work History</h2>
+            <div class="work-grid">
                 <div
-                    class="project-card"
+                    class="work-card featured glass reveal reveal-delay-1"
                     data-company="BYB Tech Srl"
                     data-role="Qt/C++ Software Engineer"
-                    data-company-description="BYB Tech Srl is a leading provider of advanced telemetry and data acquisition solutions for the cycling industry."
-                    data-dates="05/2022 - Present"
-                    data-role-location="Italy - Brescia (Remote)"
-                    data-description="Developed cross-platform Qt applications, refactored legacy codebases, and implemented real-time data visualization dashboards."
+                    data-location="Italy · Brescia (Remote)"
+                    data-dates="05/2022 – Present"
+                    data-company-desc="BYB Tech Srl is a leading provider of advanced telemetry and data acquisition solutions for the cycling industry."
+                    data-desc="Developed cross-platform Qt applications, refactored legacy codebases, and implemented real-time data visualization dashboards."
                 >
-                    <img src="resources/bybtech.png" loading="lazy" alt="BYB Tech Srl" />
-                    <div class="project-info">
-                        <h4>BYB Tech Srl</h4> 
+                    <img
+                        class="work-banner"
+                        src="resources/bybtech.png"
+                        alt="BYB Tech Srl"
+                        loading="lazy"
+                    />
+                    <div class="work-body">
+                        <div class="work-meta">
+                            <span class="work-company">BYB Tech Srl</span>
+                            <span class="work-badge">Current</span>
+                        </div>
+                        <div class="work-role">Qt/C++ Software Engineer</div>
+                        <div class="work-dates">05/2022 – Present · Italy, Brescia (Remote)</div>
                     </div>
+                    <div class="work-hover-cta"></div>
                 </div>
 
                 <div
-                    class="project-card"
+                    class="work-card glass reveal reveal-delay-1"
                     data-company="Power Gauge Pro"
-                    data-role="Qt/C++ Software Developer for embedded systems"
-                    data-company-description="Power Gauge Pro is a cutting-edge developer of customizable digital dashboards and instrument clusters for real-time vehicle data and diagnostics."
-                    data-dates="09/2024 - 04/2025 (8 months)"
-                    data-role-location="United States - Michigan (Remote)"
-                    data-description="Built and tested a user interface for an embedded device with a focus on smooth visuals and real-time updates. Integrated system features such as Wi-Fi, sensors, and communication ports to enable data collection and control. Completely redesigned the interface from scratch based on a custom Figma design, enhancing both usability and visual appeal."
+                    data-role="Qt/C++ Software Developer — Embedded Systems"
+                    data-location="United States · Michigan (Remote)"
+                    data-dates="09/2024 – 04/2025 (8 months)"
+                    data-company-desc="Power Gauge Pro is a cutting-edge developer of customizable digital dashboards and instrument clusters for real-time vehicle data and diagnostics."
+                    data-desc="Built and tested a user interface for an embedded device with a focus on smooth visuals and real-time updates. Integrated system features such as Wi-Fi, sensors, and communication ports to enable data collection and control. Completely redesigned the interface from scratch based on a custom Figma design, enhancing both usability and visual appeal."
                 >
-                    <img src="resources/powergaugepro.png" loading="lazy" alt="Power Gauge Pro" />
-                    <div class="project-info">
-                        <h4>Power Gauge Pro</h4> 
+                    <img
+                        class="work-banner"
+                        src="resources/powergaugepro.png"
+                        alt="Power Gauge Pro"
+                        loading="lazy"
+                    />
+                    <div class="work-body">
+                        <div class="work-meta">
+                            <span class="work-company">Power Gauge Pro</span>
+                        </div>
+                        <div class="work-role">Qt/C++ Software Developer — Embedded Systems</div>
+                        <div class="work-dates">09/2024 – 04/2025 · USA, Michigan (Remote)</div>
                     </div>
+                    <div class="work-hover-cta"></div>
                 </div>
 
                 <div
-                    class="project-card"
-                    data-company="VersaWare"
-                    data-role="Qt/C++ Software Developer"
-                    data-company-description="VersaWare is a software solutions company specializing in embedded systems and IoT applications."
-                    data-dates="01/2023 - 03/2023 (3 months)"
-                    data-role-location="United States - Michigan (Remote)"
-                    data-description="Implemented new components for the front-end user interface (UI), incorporating fully customized components and animations to enhance user experience."
-                >
-                    <img src="resources/versaware.png" loading="lazy" alt="VersaWare" />
-                    <div class="project-info">
-                        <h4>VersaWare</h4> 
-                    </div>
-                </div>
-
-                 <div
-                    class="project-card"
-                    data-company="Amnezia"
-                    data-role="Qt/C++ Software Developer"
-                    data-company-description="Amnezia VPN is a leading provider of secure and private internet access solutions."
-                    data-dates="09/2023 - 01/2024 (5 months)"
-                    data-role-location="Open-source (Remote)"
-                    data-description="I had the opportunity to work on this project for several months, contributing to the modernization of the user interface and initiating the upgrade from Qt 5.6 to Qt 6.3."
-                >
-                    <img src="resources/amneziavpn.png" loading="lazy" alt="Amnezia" />
-                    <div class="project-info">
-                        <h4>Amnezia</h4> 
-                    </div>
-                </div>
-
-                <div
-                    class="project-card"
+                    class="work-card glass reveal reveal-delay-2"
                     data-company="Flybotix"
                     data-role="Qt/C++ Software Developer"
-                    data-company-description="Flybotix is a company specializing in drone technology and software solutions."
-                    data-dates="02/2021 - 02/2022 (1 year)"
-                    data-role-location="Switzerland - Renens (Remote)"
-                    data-description="Redesigned the user interface from a light theme to a modern dark theme using updated components. Added support for IR images and an interactive 3D view. Implemented advanced POI management from the main view, allowing users to view and edit detailed information on the right panel, which can be exported in reports. Additionally, integrated search, filter, delete, and hide functionalities for improved usability and data handling."
+                    data-location="Switzerland · Renens (Remote)"
+                    data-dates="02/2021 – 02/2022 (1 year)"
+                    data-company-desc="Flybotix is a company specializing in drone technology and software solutions."
+                    data-desc="Redesigned the UI from light to a modern dark theme with updated components. Added IR image support and an interactive 3D view. Implemented advanced POI management from the main view with export to reports. Integrated search, filter, delete, and hide functionalities for improved usability."
                 >
-                    <img src="resources/flybotix.png" loading="lazy" alt="Flybotix" />
-                    <div class="project-info">
-                        <h4>Flybotix</h4> 
+                    <img
+                        class="work-banner"
+                        src="resources/flybotix.png"
+                        alt="Flybotix"
+                        loading="lazy"
+                    />
+                    <div class="work-body">
+                        <div class="work-meta">
+                            <span class="work-company">Flybotix</span>
+                        </div>
+                        <div class="work-role">Qt/C++ Software Developer</div>
+                        <div class="work-dates">
+                            02/2021 – 02/2022 · Switzerland, Renens (Remote)
+                        </div>
                     </div>
+                    <div class="work-hover-cta"></div>
                 </div>
-            </div>
-        </section>
 
-        <div class="modal" id="project-modal">
-            <div class="modal-content">
-                <span class="close-btn" id="close-modal">&times;</span>
-                <img id="modal-image" src="" loading="lazy" alt="Project Image" />
-                <h3 id="modal-company"
-                style="display: inline-block"></p>
-                ></h3>
-                <p
-                    id="modal-role-location"
-                    style="color: #aaa; font-size: 0.9rem; display: inline-block; margin-left: 15px"
-                ></p>
-                <br />
-                <p id="modal-role" >  </p>
-                <p id="modal-dates" style="color: #aaa; font-size: 0.9rem; font-style: italic"></p>
-                <p id="modal-description"></p>
-                <hr style="opacity: 0.4;">
-                <p id="modal-company-description" style="color: #aaa; font-size: 0.9rem; font-style: italic"></p>
+                <div
+                    class="work-card glass reveal reveal-delay-1"
+                    data-company="Amnezia VPN"
+                    data-role="Qt/C++ Software Developer"
+                    data-location="Open-source (Remote)"
+                    data-dates="09/2023 – 01/2024 (5 months)"
+                    data-company-desc="Amnezia VPN is a leading provider of secure and private internet access solutions."
+                    data-desc="Contributed to modernizing the user interface and initiated the upgrade from Qt 5.6 to Qt 6.3 for this popular open-source VPN client."
+                >
+                    <img
+                        class="work-banner"
+                        src="resources/amneziavpn.png"
+                        alt="Amnezia VPN"
+                        loading="lazy"
+                    />
+                    <div class="work-body">
+                        <div class="work-meta">
+                            <span class="work-company">Amnezia VPN</span>
+                            <span class="work-badge">Open Source</span>
+                        </div>
+                        <div class="work-role">Qt/C++ Software Developer</div>
+                        <div class="work-dates">09/2023 – 01/2024 · Open-source (Remote)</div>
+                    </div>
+                    <div class="work-hover-cta"></div>
+                </div>
+
+                <div
+                    class="work-card glass reveal reveal-delay-2"
+                    data-company="VersaWare"
+                    data-role="Qt/C++ Software Developer"
+                    data-location="United States · Michigan (Remote)"
+                    data-dates="01/2023 – 03/2023 (3 months)"
+                    data-company-desc="VersaWare is a software solutions company specializing in embedded systems and IoT applications."
+                    data-desc="Implemented new front-end UI components with fully customized widgets and animations to enhance user experience within embedded environments."
+                >
+                    <img
+                        class="work-banner"
+                        src="resources/versaware.png"
+                        alt="VersaWare"
+                        loading="lazy"
+                    />
+                    <div class="work-body">
+                        <div class="work-meta">
+                            <span class="work-company">VersaWare</span>
+                        </div>
+                        <div class="work-role">Qt/C++ Software Developer</div>
+                        <div class="work-dates">01/2023 – 03/2023 · USA, Michigan (Remote)</div>
+                    </div>
+                    <div class="work-hover-cta"></div>
+                </div>
             </div>
         </div>
 
-        <h2 id="contact" class="section-title">Contact Me</h2>
-        <section>
-            <div class="contact-icons">
-                <a href="https://github.com/HmzaLarbi" target="_blank" title="GitHub">
+        <!-- ── CONTACT ────────────────────────────────────────── -->
+        <div id="contact" class="contact-section">
+            <p class="section-label" style="justify-content: center">Get in touch</p>
+            <h2 class="section-heading reveal" style="text-align: center">Let's work together</h2>
+            <p class="contact-tagline reveal reveal-delay-1">
+                Open to exciting remote opportunities worldwide.
+            </p>
+            <div class="contact-icons reveal reveal-delay-2">
+                <a class="contact-link" href="https://github.com/HmzaLarbi" target="_blank">
                     <img
                         src="https://img.icons8.com/?size=100&id=LoL4bFzqmAa0&format=png&color=000000"
                         alt="GitHub"
                     />
+                    GitHub
                 </a>
-                <a href="https://linkedin.com/in/larbihamza" target="_blank" title="LinkedIn">
+                <a class="contact-link" href="https://linkedin.com/in/larbihamza" target="_blank">
                     <img
                         src="https://img.icons8.com/?size=100&id=kBCrQMzpQDLQ&format=png&color=000000"
                         alt="LinkedIn"
                     />
+                    LinkedIn
                 </a>
-                <a href="mailto:larbi0hamza@gmail.com" title="Email">
-                    <img src="https://img.icons8.com/?size=100&id=Iq5AZypojpBD&format=png&color=000000" alt="Email" />
+                <a class="contact-link" href="mailto:larbi0hamza@gmail.com">
+                    <img
+                        src="https://img.icons8.com/?size=100&id=Iq5AZypojpBD&format=png&color=000000"
+                        alt="Email"
+                    />
+                    Email
                 </a>
-                <a href="https://wa.me/213699543035?text=Hello%20Hamza!" target="_blank" title="WhatsApp">
-                    <img src="https://img.icons8.com/?size=100&id=A1JUR9NRH7sC&format=png&color=000000" alt="WhatsApp" />
+                <a
+                    class="contact-link"
+                    href="https://wa.me/213699543035?text=Hello%20Hamza!"
+                    target="_blank"
+                >
+                    <img
+                        src="https://img.icons8.com/?size=100&id=A1JUR9NRH7sC&format=png&color=000000"
+                        alt="WhatsApp"
+                    />
+                    WhatsApp
                 </a>
             </div>
-        </section>
+        </div>
+
+        <!-- ── MODAL ──────────────────────────────────────────── -->
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-box">
+                <img class="modal-banner" id="modal-img" src="" alt="" />
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="modal-company-name" id="modal-company"></span>
+                        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+                    </div>
+                    <div class="modal-role-line" id="modal-role"></div>
+                    <div class="modal-meta-line">
+                        <span id="modal-location">📍 </span>
+                        <span id="modal-dates">🗓 </span>
+                    </div>
+                    <div class="modal-divider"></div>
+                    <p class="modal-desc" id="modal-desc"></p>
+                    <div class="modal-divider"></div>
+                    <p class="modal-company-blurb" id="modal-company-desc"></p>
+                </div>
+            </div>
+        </div>
+
+        <footer>Built with ❤️ by Hamza from Algeria 🇩🇿</footer>
 
         <script>
-            let lastScrollTop = 0;
-            const navbar = document.getElementById("navbar");
-
-            window.addEventListener("scroll", () => {
-                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-                if (currentScroll > lastScrollTop) {
-                    navbar.classList.add("hidden-up");
-                } else {
-                    navbar.classList.remove("hidden-up");
+            /* ── ORBS ─────────────────────────────────────────── */
+            (function () {
+                const canvas = document.getElementById("bg-canvas");
+                const colors = [
+                    ["#0d5c2e", "#1a8c4a"],
+                    ["#0a4020", "#157035"],
+                    ["#1d6b3a", "#0f3d20"],
+                    ["#09301a", "#1f7043"],
+                    ["#072814", "#0e4a25"],
+                    ["#14663a", "#083020"],
+                ];
+                for (let i = 0; i < 9; i++) {
+                    const orb = document.createElement("div");
+                    orb.className = "orb";
+                    const size = 300 + Math.random() * 500;
+                    const [c1, c2] = colors[i % colors.length];
+                    orb.style.cssText = `
+            width:${size}px; height:${size}px;
+            top:${Math.random() * 110 - 10}%;
+            left:${Math.random() * 110 - 10}%;
+            background:radial-gradient(circle at 40% 40%, ${c1}, ${c2});
+            opacity:${0.2 + Math.random() * 0.25};
+            animation-duration:${14 + Math.random() * 16}s;
+            animation-delay:${Math.random() * 8}s;
+        `;
+                    canvas.appendChild(orb);
                 }
-                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-            });
+            })();
 
-            document.querySelectorAll('nav a[href^="#"]').forEach((anchor) => {
-                anchor.addEventListener("click", function (e) {
+            /* ── NAVBAR HIDE/SHOW ─────────────────────────────── */
+            (function () {
+                let last = 0;
+                const nav = document.getElementById("navbar");
+                window.addEventListener("scroll", () => {
+                    const cur = window.scrollY;
+                    nav.classList.toggle("hidden-up", cur > last && cur > 80);
+                    last = cur <= 0 ? 0 : cur;
+                });
+            })();
+
+            /* ── SMOOTH SCROLL ────────────────────────────────── */
+            document.querySelectorAll('a[href^="#"]').forEach((a) => {
+                a.addEventListener("click", (e) => {
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute("href"));
-                    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+                    const t = document.querySelector(a.getAttribute("href"));
+                    if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
                 });
             });
 
-            const nameText = "Hamza LARBI";
-            const roleText = "Qt/C++ Software Engineer";
-            const nameElem = document.getElementById("hero-name");
-            const roleElem = document.getElementById("hero-role");
+            /* ── SCROLL REVEAL ────────────────────────────────── */
+            (function () {
+                const obs = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((e) => {
+                            if (e.isIntersecting) {
+                                e.target.classList.add("visible");
+                                obs.unobserve(e.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.12 },
+                );
+                document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+            })();
 
-            let nameIndex = 0;
-            function typeName() {
-                if (nameIndex < nameText.length) {
-                    nameElem.textContent += nameText.charAt(nameIndex);
-                    nameIndex++;
-                    setTimeout(typeName, 100);
-                } else {
-                    setTimeout(typeRole, 400);
-                }
-            }
+            /* ── MODAL ────────────────────────────────────────── */
+            (function () {
+                const overlay = document.getElementById("modal-overlay");
+                const mImg = document.getElementById("modal-img");
+                const mCompany = document.getElementById("modal-company");
+                const mRole = document.getElementById("modal-role");
+                const mLoc = document.getElementById("modal-location");
+                const mDates = document.getElementById("modal-dates");
+                const mDesc = document.getElementById("modal-desc");
+                const mCDesc = document.getElementById("modal-company-desc");
+                const closeBtn = document.getElementById("modal-close");
 
-            let roleIndex = 0;
-            function typeRole() {
-                if (roleIndex < roleText.length) {
-                    roleElem.textContent += roleText.charAt(roleIndex);
-                    roleIndex++;
-                    setTimeout(typeRole, 80);
-                }
-            }
-
-            window.onload = typeName;
-
-            const modal = document.getElementById("project-modal");
-            const modalImg = document.getElementById("modal-image");
-            const modalCompany = document.getElementById("modal-company");
-            const modalCompanyDescription = document.getElementById("modal-company-description");
-            const modalRoleLocation = document.getElementById("modal-role-location");
-            const modalRole = document.getElementById("modal-role");
-            const modalDates = document.getElementById("modal-dates");
-            const modalDesc = document.getElementById("modal-description");
-            const closeModal = document.getElementById("close-modal");
-
-            document.querySelectorAll(".project-card").forEach((card) => {
-                card.addEventListener("click", () => {
-                    // tech cards are non-interactive (have tech-card class)
-                    if (card.classList.contains("tech-card")) return;
-                    modal.classList.add("show");
-                    modalImg.src = card.querySelector("img")?.src || "";
-                    modalCompany.textContent = card.dataset.company || "";
-                    modalRole.textContent = card.dataset.role || "";
-                    modalRoleLocation.textContent = card.dataset.roleLocation || "";
-                    modalDates.textContent = card.dataset.dates || "";
-                    modalDesc.textContent = card.dataset.description || "";
-                    modalCompanyDescription.textContent = card.dataset.companyDescription || "";
+                document.querySelectorAll(".work-card").forEach((card) => {
+                    card.addEventListener("click", () => {
+                        mImg.src = card.querySelector(".work-banner")?.src || "";
+                        mCompany.textContent = card.dataset.company || "";
+                        mRole.textContent = card.dataset.role || "";
+                        mLoc.textContent = "📍 " + (card.dataset.location || "");
+                        mDates.textContent = "🗓 " + (card.dataset.dates || "");
+                        mDesc.textContent = card.dataset.desc || "";
+                        mCDesc.textContent = card.dataset.companyDesc || "";
+                        overlay.classList.add("open");
+                        document.body.style.overflow = "hidden";
+                    });
                 });
-            });
 
-            closeModal.addEventListener("click", () => {
-                modal.classList.remove("show");
-            });
+                function close() {
+                    overlay.classList.remove("open");
+                    document.body.style.overflow = "";
+                }
+                closeBtn.addEventListener("click", close);
+                overlay.addEventListener("click", (e) => {
+                    if (e.target === overlay) close();
+                });
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape") close();
+                });
+            })();
 
-            modal.addEventListener("click", (e) => {
-                if (e.target === modal) modal.classList.remove("show");
-            });
+            /* ── VISIT NOTIFY ─────────────────────────────────── */
+            fetch("https://notify-visit.hamza-arbi-15-cloudflare-4d2.workers.dev/");
         </script>
     </body>
-    <footer style="text-align: center; color: var(--text-light); padding: 15px; background-color: var(--glass-green); position: relative; bottom: 0; width: 100%;">
-    Built with ❤️ by Hamza from Algeria 🇩🇿.
-</footer>
 </html>
