@@ -764,6 +764,53 @@ footer {
     }
 }
 
+/* ─── DISABLE ANIMATIONS ON MOBILE / TOUCH DEVICES ─────── */
+@media (max-width: 768px), (hover: none) {
+    .orb {
+        animation: none !important;
+    }
+
+    .scroll-bar::after {
+        animation: none !important;
+    }
+
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .work-card:hover {
+        transform: none !important;
+    }
+
+    .work-card:hover .work-banner {
+        transform: none !important;
+    }
+
+    .tech-item:hover {
+        transform: none !important;
+    }
+
+    .contact-link:hover {
+        transform: none !important;
+    }
+
+    .work-hover-cta {
+        display: none;
+    }
+}
+
+/* ─── RESPECT USER'S "REDUCE MOTION" SYSTEM SETTING ─────── */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 /* scrollbar */
 ::-webkit-scrollbar {
     width: 6px;

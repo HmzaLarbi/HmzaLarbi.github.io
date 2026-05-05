@@ -462,7 +462,9 @@
                     ["#072814", "#0e4a25"],
                     ["#14663a", "#083020"],
                 ];
-                for (let i = 0; i < 4; i++) {
+                const isMobile = window.matchMedia("(hover: none)").matches;
+                const count = isMobile ? 0 : 4;
+                for (let i = 0; i < count; i++) {
                     const orb = document.createElement("div");
                     orb.className = "orb";
                     const size = 300 + Math.random() * 500;
