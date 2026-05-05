@@ -52,6 +52,8 @@ body {
     border-radius: 50%;
     filter: blur(80px);
     opacity: 0.35;
+    will-change: transform;
+    contain: strict;
     animation: drift linear infinite;
 }
 @keyframes drift {
@@ -97,6 +99,7 @@ body::after {
     transform: translateX(-50%);
     z-index: 100;
     display: flex;
+    will-change: transform;
     gap: 4px;
     padding: 8px 14px;
     background: rgba(10, 26, 16, 0.75);
@@ -268,9 +271,7 @@ body::after {
 
 /* ─── GLASS CARD ─────────────────────────────────────────── */
 .glass {
-    background: var(--glass-bg);
-    backdrop-filter: var(--blur);
-    -webkit-backdrop-filter: var(--blur);
+    background: rgba(15, 40, 25, 0.82);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
 }
@@ -414,6 +415,7 @@ body::after {
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    will-change: transform;
     transition:
         transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
         border-color 0.3s;
