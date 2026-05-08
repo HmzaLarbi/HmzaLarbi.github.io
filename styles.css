@@ -750,6 +750,7 @@ footer {
     #navbar a {
         font-size: 0.7rem;
         padding: 5px 10px;
+        width: max-content;
     }
 }
 @media (max-width: 480px) {
